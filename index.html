@@ -9,16 +9,30 @@
 </head>
 
 <body>
-  <div class="moves">
-    <button class="rock">ROCK</button>
-    <button class="paper">PAPER</button>
-    <button class="scissors">SCISSORS</button>
-  </div>
-  <div class="results"></div>
-  <p class="score"></p>
+  <div class="title">ROCK PAPER SCISSORS</div>
 
-  <div>
-    <button class="playAgainBtn">Play again</button>
+  <div class="results">
+    <div id="human-info">
+      <img id="human-move" src="images/rock.jpg">
+      <div id="human-score"></div>
+    </div>
+
+    <div id="seperator">-</div>
+
+    <div id="computer-info">
+      <img id="computer-move" src="images/paper.jpg">
+      <div id="computer-score"></div>
+    </div>
+  </div>
+
+  <div class="moves">
+    <div class="move"><button class="rock"><img src="images/rock.jpg"></button></div>
+    <div class="move"><button class="paper"><img src="images/paper.jpg"></button></div>
+    <div class="move"><button class="scissors"><img src="images/scissors.jpg"></button></div>
+  </div>
+
+  <div class=play-again-container>
+    <button class="play-again-btn">Play again</button>
   </div>
 </body>
 </html>

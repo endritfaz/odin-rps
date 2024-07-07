@@ -2,7 +2,7 @@ const ROCK = 0;
 const PAPER = 1; 
 const SCISSORS = 2;
 
-moves = ['Rock', 'Paper', 'Scissors'];
+moves = ['rock', 'paper', 'scissors'];
 
 let humanScore = 0, computerScore = 0;
 
@@ -17,15 +17,19 @@ const scissorsCallback = () => playRound(getComputerChoice(), SCISSORS);
 const score = document.querySelector('.score')
 const results = document.querySelector('.results');
 
-const playAgainBtn = document.querySelector(".playAgainBtn");
+const playAgainBtn = document.querySelector(".play-again-btn");
+
+const humanChoiceDiv = document.querySelector("#human-move");
+const computerChoiceDiv = document.querySelector("#computer-move");
 
 function configureGame() {
     humanScore = 0;
     computerScore = 0; 
-    results.textContent = "";
     displayScore();
 
     playAgainBtn.style.display = "none";
+    computerChoiceDiv.style.borderColor = "black";
+    humanChoiceDiv.style.borderColor = "black";
 
     playAgainBtn.addEventListener("click", () => configureGame());
     rock.addEventListener("click", rockCallback);
@@ -39,9 +43,6 @@ function loadEndScreen() {
     paper.removeEventListener("click", paperCallback);
     scissors.removeEventListener("click", scissorsCallback);
 
-    // TODO: Grey out the RPS buttons 
-
-    // TODO: Show play again button
     playAgainBtn.style.display = "block";
 }
 
@@ -50,25 +51,31 @@ function getComputerChoice() {
 }
 
 function playRound(computerChoice, humanChoice) {
-    results.textContent = "";
     const result = document.createElement("p");
 
     if (computerChoice == humanChoice) {
-        result.textContent = "Draw!";
+        console.log("Draw");
+        computerChoiceDiv.style.borderColor = "black";
+        humanChoiceDiv.style.borderColor = "black";
     }
 
     else if ((computerChoice == ROCK && humanChoice == SCISSORS) ||
              (computerChoice == PAPER && humanChoice == ROCK) ||
              (computerChoice == SCISSORS && humanChoice == PAPER)) {
-        result.textContent = `You lose! ${moves[computerChoice]} beats ${moves[humanChoice]}`;
+        console.log("Computer beats Human");
+        computerChoiceDiv.style.borderColor = "#3CB371";
+        humanChoiceDiv.style.borderColor = "#B22222";
         computerScore += 1;          
     }
 
     else {
-        result.textContent = `You win! ${moves[humanChoice]} beats ${moves[computerChoice]}`;
+        console.log("Human beats Computer");
+        computerChoiceDiv.style.borderColor = "#B22222";
+        humanChoiceDiv.style.borderColor = "#3CB371";
         humanScore += 1;
     }
-    results.appendChild(result);
+    
+    updateChoiceImages(humanChoice, computerChoice)
     displayScore()
     checkForWinner();  
 }
@@ -90,7 +97,21 @@ function checkForWinner() {
 }
 
 function displayScore() {
-    score.textContent = `${humanScore} : ${computerScore}`;
+    const humanScoreDiv = document.querySelector("#human-score");
+    const computerScoreDiv = document.querySelector("#computer-score");
+    humanScoreDiv.textContent = humanScore;
+    computerScoreDiv.textContent = computerScore;
+}
+
+function updateChoiceImages(humanChoice, computerChoice) {
+    const humanChoiceImg = document.querySelector("#human-move");
+    const computerChoiceImg = document.querySelector("#computer-move");
+
+    let humanSrc = `images/${moves[humanChoice]}.jpg`;
+    let computerSrc = `images/${moves[computerChoice]}.jpg`;
+
+    humanChoiceImg.src = humanSrc;
+    computerChoiceImg.src = computerSrc;
 }
 
 configureGame()
