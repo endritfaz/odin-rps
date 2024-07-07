@@ -6,18 +6,18 @@ moves = ['Rock', 'Paper', 'Scissors'];
 
 let humanScore = 0, computerScore = 0;
 
-const rock = document.querySelector("#rock");
-const paper = document.querySelector("#paper");
-const scissors = document.querySelector("#scissors");
+const rock = document.querySelector(".rock");
+const paper = document.querySelector(".paper");
+const scissors = document.querySelector(".scissors");
 
 const rockCallback = () => playRound(getComputerChoice(), ROCK);
 const paperCallback = () => playRound(getComputerChoice(), PAPER);
 const scissorsCallback = () => playRound(getComputerChoice(), SCISSORS);
 
-const score = document.querySelector('#score')
-const results = document.querySelector('#results');
+const score = document.querySelector('.score')
+const results = document.querySelector('.results');
 
-const playAgainBtn = document.querySelector("#playAgainBtn");
+const playAgainBtn = document.querySelector(".playAgainBtn");
 
 function configureGame() {
     humanScore = 0;
@@ -41,7 +41,7 @@ function loadEndScreen() {
 
     // TODO: Grey out the RPS buttons 
 
-    // TODO: Add a play again button
+    // TODO: Show play again button
     playAgainBtn.style.display = "block";
 }
 
@@ -70,7 +70,6 @@ function playRound(computerChoice, humanChoice) {
     }
     results.appendChild(result);
     displayScore()
-    
     checkForWinner();  
 }
 
